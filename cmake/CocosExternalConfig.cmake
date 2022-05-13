@@ -79,4 +79,7 @@ elseif(LINUX)
     set(platform_spec_path linux/64-bit)
 endif()
 
+if (DEFINED platform_spec_path_arm64)
+    set(platform_spec_path_arm64 "${_path_prefix}${platform_spec_path_arm64}")
+endif()
 set(platform_spec_path "${_path_prefix}${platform_spec_path}")
