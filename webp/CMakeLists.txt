@@ -17,7 +17,13 @@ if(WINDOWS)
     IMPORTED_LOCATION "${platform_spec_path}/lib${lib_name}.lib"
   )
 else()
-  set_target_properties(${target_name} PROPERTIES
-    IMPORTED_LOCATION "${platform_spec_path}/lib${lib_name}.a"
-  )
+  if (DEFINED platform_spec_path_arm64)
+    set_target_properties(${target_name} PROPERTIES
+      IMPORTED_LOCATION "${platform_spec_path_arm64}/lib${lib_name}.a"
+    )
+  else()
+    set_target_properties(${target_name} PROPERTIES
+      IMPORTED_LOCATION "${platform_spec_path}/lib${lib_name}.a"
+    )
+  endif()
 endif()

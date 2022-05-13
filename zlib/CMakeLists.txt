@@ -17,9 +17,15 @@ if(MACOSX OR ANDROID)
   set_target_properties(${target_name} PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
   )
-  set_target_properties(${target_name} PROPERTIES
-    IMPORTED_LOCATION "${platform_spec_path}/libz.a"
-  )
+  if (DEFINED platform_spec_path_arm64)
+    set_target_properties(${target_name} PROPERTIES
+      IMPORTED_LOCATION "${platform_spec_path_arm64}/libz.a"
+    )
+  else()
+    set_target_properties(${target_name} PROPERTIES
+      IMPORTED_LOCATION "${platform_spec_path}/libz.a"
+    )
+  endif()
 elseif(WINDOWS)
   set_target_properties(${target_name} PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/../win32-specific/zlib/include"
